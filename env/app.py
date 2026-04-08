@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from env.ration_env import RationGuardEnv
 
 app = FastAPI()
@@ -19,14 +19,33 @@ def reset_get(level: str = "easy"):
 
 
 @app.post("/reset")
-def reset_post(payload: dict | None = None):
-    payload = payload or {}
-    level = payload.get("level", "easy")
+@app.post("/reset/")
+async def reset_post(request: Request):
+    level = "easy"
+    try:
+        payload = await request.json()
+        if isinstance(payload, dict):
+            level = str(payload.get("level", "easy"))
+    except Exception:
+        # Empty body is valid for reset.
+        pass
+
     obs = env.reset(level=level)
     return {"observation": obs}
 
+
 @app.post("/step")
-def step(action: dict):
+@app.post("/step/")
+async def step(request: Request):
+    action = {}
+    try:
+        payload = await request.json()
+        if isinstance(payload, dict):
+            action = payload
+    except Exception:
+        # Missing/invalid body is forwarded as invalid action to env.step.
+        action = {}
+
     obs, reward, done, info = env.step(action)
     return {
         "observation": obs,
