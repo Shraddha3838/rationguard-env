@@ -1,0 +1,51 @@
+name: rationguard-env
+version: 2.0.0
+description: Deterministic multi-step PDS fraud detection environment for OpenEnv.
+
+# All step rewards and episode scores are normalized to [0, 1].
+reward_range: [0, 1]
+
+# Explicit environment interface contract.
+interface:
+  reset: true
+  step: true
+  state: true
+
+# Action space exposed to evaluators.
+action_space:
+  type: enum
+  values:
+    - REQUEST_BENEFICIARY_AUDIT
+    - REQUEST_DEALER_LEDGER
+    - REQUEST_TRANSPORT_LOG
+    - FLAG_BENEFICIARY_FRAUD
+    - FLAG_DEALER_FRAUD
+    - FLAG_SUPPLY_CHAIN_FRAUD
+    - CLEAR_CLAIM
+
+# Observation schema (structured JSON-like dictionary).
+observation_space:
+  type: object
+  required:
+    - task_level
+    - task_id
+    - step_number
+    - max_steps
+    - expected_quota
+    - claimed_quantity
+    - dealer_stock
+    - transported_stock
+    - suspicion_score
+    - revealed_checks
+    - revealed_indicators
+    - allowed_actions
+
+# Three deterministic task levels with increasing reasoning complexity.
+tasks:
+  - easy
+  - medium
+  - hard
+
+# Optional deterministic edge-case task for local/extended testing.
+additional_tasks:
+  - no_fraud
