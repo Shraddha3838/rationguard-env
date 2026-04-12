@@ -15,9 +15,9 @@ from env.ration_env import RationGuardEnv
 from env.tasks import available_task_levels
 
 
-API_BASE_URL = os.getenv("API_BASE_URL") or "https://router.huggingface.co/v1"
+API_BASE_URL = os.environ["API_BASE_URL"]
 MODEL_NAME = os.getenv("MODEL_NAME") or "Qwen/Qwen2.5-72B-Instruct"
-API_KEY = os.getenv("HF_TOKEN") or os.getenv("API_KEY") or "DUMMY_KEY"
+API_KEY = os.environ["API_KEY"]
 BENCHMARK = os.getenv("RATION_GUARD_BENCHMARK", "rationguard-env")
 MAX_TOKENS = 24
 
