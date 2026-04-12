@@ -2,10 +2,15 @@
 name = "rationguard-env"
 version = "0.1.0"
 description = "OpenEnv-compatible PDS fraud detection environment"
-authors = [
-    { name = "Shraddha" }
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+   "openenv>=0.1.0"
 ]
-dependencies = []
+
+[project.scripts]
+server = "app:app"
 
 [build-system]
 requires = ["setuptools"]
