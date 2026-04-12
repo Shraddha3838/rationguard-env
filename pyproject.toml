@@ -6,11 +6,13 @@ description = "OpenEnv-compatible PDS fraud detection environment"
 dependencies = [
     "fastapi",
     "uvicorn",
-   "openenv>=0.1.0"
+    "pydantic>=2.6,<3",
+    "openai>=1.30,<2",
+    "openenv-core>=0.1.0",
 ]
 
 [project.scripts]
-server = "app:app"
+server = "server.app:main"
 
 [build-system]
 requires = ["setuptools"]

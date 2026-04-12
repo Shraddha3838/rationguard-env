@@ -155,11 +155,17 @@ Inference script requirements satisfied:
 - prints strict `[START]`, `[STEP]`, `[END]` log lines
 - deterministic policy for reproducible baseline
 
-Optional env vars:
+Required/expected env vars for submission runners:
 
-- `API_BASE_URL`
-- `MODEL_NAME`
-- `HF_TOKEN` (or `API_KEY`)
+- `API_BASE_URL` — OpenAI-compatible endpoint (default: HF router)
+- `MODEL_NAME` — model id used for completion calls
+- `HF_TOKEN` — token used as API key for routed calls
+
+The script uses the OpenAI Python client and emits strict single-line stdout records in this exact order per task:
+
+- `[START] task=<task> env=<benchmark> model=<model>`
+- `[STEP] step=<n> action=<action> reward=<0.00> done=<true|false> error=<msg|null>`
+- `[END] success=<true|false> steps=<n> score=<0.00-1.00> rewards=<r1,r2,...>`
 
 ---
 
