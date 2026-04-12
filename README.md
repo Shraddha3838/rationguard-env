@@ -1,3 +1,12 @@
+---
+title: RationGuardEnv
+emoji: 🛡️
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_file: app.py
+pinned: false
+---
 # RationGuardEnv
 
 **RationGuardEnv** is a deterministic OpenEnv-compatible simulation for fraud detection in India’s Public Distribution System (PDS), a system where leakage has been estimated at **~₹40,000 crore** in some analyses.  
