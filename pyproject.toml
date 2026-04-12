@@ -1,0 +1,12 @@
+[project]
+name = "rationguard-env"
+version = "0.1.0"
+description = "OpenEnv-compatible PDS fraud detection environment"
+authors = [
+    { name = "Shraddha" }
+]
+dependencies = []
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
